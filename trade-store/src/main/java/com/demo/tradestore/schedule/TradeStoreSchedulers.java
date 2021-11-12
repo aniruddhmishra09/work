@@ -30,8 +30,8 @@ public class TradeStoreSchedulers {
 
 	private static final Logger logger = LoggerFactory.getLogger(TradeStoreSchedulers.class);
 
-	//@Scheduled(cron = "0 0 0 * * *")
-	@Scheduled(cron = "0 * * * * *")
+	@Scheduled(cron = "0 0 0 * * *")
+	//@Scheduled(cron = "0 * * * * *")
 	public void expireMaturedTradesSchedules() {
 		logger.info("Expire Matured Trades Scheduler Started");
 		List<TradeDetails> tradeDetails = tradeDetailsRepository
