@@ -46,6 +46,7 @@ public class TradeDetails {
 		this.maturityDate = tradeDetails.getMaturityDate();
 		this.createdDate = tradeDetails.getCreatedDate();
 		this.expired = expired;
+		this.id = tradeDetails.getId();
 	}
 
 	public TradeDetails(String tradeId, Integer version, String counterPartyId, String bookId, LocalDate maturityDate,

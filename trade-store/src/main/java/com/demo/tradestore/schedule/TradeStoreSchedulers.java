@@ -30,19 +30,20 @@ public class TradeStoreSchedulers {
 
 	private static final Logger logger = LoggerFactory.getLogger(TradeStoreSchedulers.class);
 
-	@Scheduled(cron = "0 0 0 * * *")
-	// @Scheduled(cron = "0 * * * * *")
+	//@Scheduled(cron = "0 0 0 * * *")
+	@Scheduled(cron = "0 * * * * *")
 	public void expireMaturedTradesSchedules() {
 		logger.info("Expire Matured Trades Scheduler Started");
 		List<TradeDetails> tradeDetails = tradeDetailsRepository
 				.findByExpiredAndMaturityDateLessThan(CommonConstants.TRADE_DETAILS_EXPIRED_N, LocalDate.now());
 
-		if (null != tradeDetails) {
+		if (null != tradeDetails && tradeDetails.size() != 0) {
 			tradeDetails = tradeDetails.stream().map(s -> new TradeDetails(s, CommonConstants.TRADE_DETAILS_EXPIRED_Y))
 					.collect(Collectors.toList());
 
 			tradeDetailsRepository.saveAll(tradeDetails);
 			logger.info("Total Trades Expired - {}", tradeDetails.size());
 		}
+		logger.info("Expire Matured Trades Scheduler Completed");
 	}
 }
